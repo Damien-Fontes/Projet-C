@@ -2,7 +2,12 @@
 #define __ARBRE_H__
 
 
-typedef int Elt;
+struct zElt {
+  int poids;
+  char c;
+};
+
+typedef zElt Elt;
 
 struct znoeud {
   Elt elt;
