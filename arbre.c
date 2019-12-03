@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <assert.h>
-#include "liste.h"
 #include "arbre.h"
 
 arbre creer_arbre (Elt x, arbre fg, arbre fd) {
