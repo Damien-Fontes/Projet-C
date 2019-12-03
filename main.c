@@ -2,7 +2,6 @@
 #include <assert.h>
 #include "liste.h"
 #include "arbre.h"
-#include "file.h"
 
 int main(int argc, char const *argv[]) {
   int acc;
@@ -24,22 +23,7 @@ int main(int argc, char const *argv[]) {
   b2 = creer_arbre(2, b4, b5);
   b = creer_arbre(5, b1, b2);
 
-  printf("Profondeur : \n");
-  profondeur_prefixe (a, afficher_racine);
-  printf("\n");
-
-  printf("Largeur : \n");
-  largeur (a, afficher_racine);
-
-  printf("Hauteur : %d\n", hauteur(a));
-  printf("Nb Feuilles : %d\n", nb_feuilles(a));
-  printf("Egalité : %d\n", egalite(a,b));
-  printf("Est sous arbre : %d\n", est_sous_arbre(a,b));
-  printf("Rechercher l'élément dans a : %d\n", racine(rechercher(a,6)));
-  printf("Itérer Somme : %d\n", iterer (a, addition, acc));
-
   detruire_arbre (a);
   detruire_arbre (b);
   return 0;
-
 }

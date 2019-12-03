@@ -21,15 +21,5 @@ arbre fils_gauche (arbre a);
 arbre fils_droit (arbre a);
 int est_feuille (arbre a);
 arbre detruire_arbre (arbre a);
-void profondeur_prefixe (arbre a, void action (arbre));
-void largeur (arbre a, void action(arbre));
-void afficher_racine (arbre a);
-int hauteur (arbre a);
 int nb_feuilles (arbre a);
-int egalite (arbre a, arbre b);
-noeud * rechercher (arbre a, Elt e);
-int est_sous_arbre (arbre a, arbre b);
-int iterer (arbre a, int action(int, int), int acc);
-int soustraction (int a, int b);
-int addition (int a, int b);
 #endif
