@@ -31,6 +31,17 @@ void fermer_fichier (fichier fic) {
   printf("Fichier fermé\n");
 }
 
+bool fichier_existe(char* filename) {
+	FILE* f = fopen(filename, "r");
+	if (f == NULL) {
+		return false;
+	}
+	fclose(f);
+	return true;
+}
+
+
+/*
 void main () {
   fichier ficW = ouvrir_fichier("test.bin", "wb");
   ecrire_binaire (ficW, '1');
@@ -42,3 +53,4 @@ void main () {
   lire_binaire (ficR, 10);
   fermer_fichier(ficR);
 }
+*/

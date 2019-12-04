@@ -1,13 +1,9 @@
 #ifndef __ARBRE_H__
 #define __ARBRE_H__
 
-
-struct zElt {
-  int poids;
-  char c;
-};
-
-typedef zElt Elt;
+typedef struct {
+	void* caractere;
+} Elt;
 
 struct znoeud {
   Elt elt;
