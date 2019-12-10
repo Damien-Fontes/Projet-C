@@ -14,29 +14,35 @@ Fichier init_fichier (Fichier fic, char * nom) {
 Fichier ouvrir_fichier (Fichier fic, char * mode) {
   fic.fic = NULL;
   fic.fic = fopen (fic.nom,mode);
+  if (fic.fic != NULL)
+    printf("Fichier ouvert\n");
   return fic;
 }
 
-void ecrire_bit (Fichier fic, char bit) {
-  fic.octet[fic.iOctet++];
-  if (fic.iOctet == 7) {
-    fic.iOctet = 0;
+void ecrire_bit (Fichier * fic, char bit) {
+  fic->octet[fic->iOctet++];
+  printf("iOctet : %d\n", fic->iOctet);
+  if (fic->iOctet == 7) {
+    printf("Octet plein\n");
+    ecrire_buffer (fic);
+    fic->iOctet = 0;
   }
 }
 
-void ecrire_buffer (Fichier fic){
+void ecrire_buffer (Fichier * fic){
   int i;
-  for (i = 0; i<fic.iOctet; i++) {
-    fic.buffer[fic.iBuffer++];
-    if (fic.iBuffer == sizeof (fic.buffer)) {
+  for (i = 0; i<fic->iOctet; i++) {
+    fic->buffer[fic->iBuffer++];
+    printf("iBuffer : %d\n", fic->iBuffer);
+    if (fic->iBuffer == sizeof (fic->buffer)) {
       ecrire_binaire (fic);
-      fic.iBuffer = 0;
+      fic->iBuffer = 0;
     }
   }
 }
 
-void ecrire_binaire (Fichier fic) {
-  fwrite (&fic.iBuffer,1,1,fic.fic);
+void ecrire_binaire (Fichier * fic) {
+  fwrite (&fic->iBuffer,1,1,fic->fic);
   //printf ("écriture de %c\n", bit);
 }
 
@@ -69,9 +75,15 @@ void main () {
   //ficW = (Fichier) malloc (sizeof(Fichier));
   ficW = init_fichier (ficW, "../test.bin");
   ficW = ouvrir_fichier(ficW, "wb");
-  ecrire_bit (ficW, '1');
-  ecrire_bit (ficW, '0');
-  ecrire_bit (ficW, '1');
+  Fichier * f = &ficW;
+  ecrire_bit (f, '1');
+  ecrire_bit (f, '0');
+  ecrire_bit (f, '1');
+  ecrire_bit (f, '1');
+  ecrire_bit (f, '1');
+  ecrire_bit (f, '0');
+  ecrire_bit (f, '1');
+  ecrire_bit (f, '1');
   fermer_fichier(ficW);
 
 /*  fichier ficR = ouvrir_fichier("test.bin", "rb");
