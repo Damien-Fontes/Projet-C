@@ -1,7 +1,7 @@
 #ifndef __FICHIER_H__
 #define __FICHIER_H__
 
-struct Fichier {
+typedef struct{
   FILE * fic;
   char * nom;
   char * buffer;
@@ -10,5 +10,5 @@ struct Fichier {
   int iOctet;
   int iBuffer;
 
-};
+}Fichier;
 #endif
