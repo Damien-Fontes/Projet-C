@@ -4,8 +4,8 @@
 typedef struct{
   FILE * fic;
   char * nom;
-  char * buffer;
-  char * octet;
+  char * buffer[8];
+  char * octet[256];
 
   int iOctet;
   int iBuffer;
@@ -18,7 +18,8 @@ void ecrire_bit (Fichier *fic, char bit);
 void ecrire_buffer (Fichier *fic);
 void ecrire_binaire (Fichier *fic);
 void lire_binaire (Fichier fic, char * buffer);
-void fermer_fichier (Fichier fic);
+void fermer_fichier (Fichier * fic);
+void verification_Fic (Fichier * fic);
 //bool fichier_existe(char* filename);
 
 #endif
