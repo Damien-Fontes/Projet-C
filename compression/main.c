@@ -21,21 +21,21 @@ int main(int argc, char** argv) {
 	mode = UNDEFINED;
 	// Lecture des arguments
 	for (i = 1; i < argc; ++i) {
-		if (strcmp(argv[k], ARG_SHORT ARG_COMPRESS) == 0
+		if (strcmp(argv[i], ARG_SHORT ARG_COMPRESS) == 0
 			&& mode == UNDEFINED) {
 			mode = COMPRESS;
 		}
-		else if (strcmp(argv[k], ARG_SHORT ARG_DECOMPRESS) == 0
+		else if (strcmp(argv[i], ARG_SHORT ARG_DECOMPRESS) == 0
 			&& mode == UNDEFINED) {
 			mode = DECOMPRESS;
 		}
-		else if (argv[k][0] == ARG_SHORT) {
+		else if (argv[i][0] == ARG_SHORT) {
 			perror("Invalid arguments");
 			return EXIT_FAILURE;
 		}
 		else {
 			// appel d'une fonction file_exists et indique si cet argument est un fichier qui existe
-			if (!fichier_existe(argv[k])) {
+			if (!fichier_existe(argv[i])) {
 				perror("File doesn't exist");
 				return EXIT_FAILURE;
 			}
@@ -43,7 +43,7 @@ int main(int argc, char** argv) {
 		}
 	}
 
-	// Si aucun mode n'a été spécifié, on quitte le programme.
+	// Si aucun mode n'a ï¿½tï¿½ spï¿½cifiï¿½, on quitte le programme.
 	if (mode == UNDEFINED) {
 		perror("Missing arguments");
 		return EXIT_FAILURE;
