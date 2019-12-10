@@ -1,36 +1,47 @@
 #include <stdio.h>
+#include <stdlib.h>
 #include "fichier.h"
 
+Fichier init_fichier (Fichier fic, char * nom) {
+  fic.fic = NULL;
+  fic.nom = nom;
+  fic.iOctet = 0;
+  fic.iBuffer = 0;
+
+  return fic;
+}
+
 Fichier ouvrir_fichier (Fichier fic, char * mode) {
-  fic->f = NULL;
-  fic->f = fopen (nomF,mode);
+  fic.fic = NULL;
+  fic.fic = fopen (fic.nom,mode);
   return fic;
 }
 
 void ecrire_bit (Fichier fic, char bit) {
-  fic->octet[iOctet++];
-  if (fic->iOctet == 7) {
-
-    fic->iOctet = 0;
+  fic.octet[fic.iOctet++];
+  if (fic.iOctet == 7) {
+    fic.iOctet = 0;
   }
 }
 
 void ecrire_buffer (Fichier fic){
   int i;
-  for (i = 0; i<fic->iOctet; i++) {
-    fic->buffer[iBuffer]
+  for (i = 0; i<fic.iOctet; i++) {
+    fic.buffer[fic.iBuffer++];
+    if (fic.iBuffer == sizeof (fic.buffer)) {
+      ecrire_binaire (fic);
+      fic.iBuffer = 0;
+    }
   }
 }
 
-void ecrire_binaire (Fichier fic, char bit) {
-  fwrite (&bit,1,1,fic);
-  printf ("écriture de %c\n", bit);
+void ecrire_binaire (Fichier fic) {
+  fwrite (&fic.iBuffer,1,1,fic.fic);
+  //printf ("écriture de %c\n", bit);
 }
 
-char * lire_binaire (Fichier fic, int taille_buffer) {
-  char buffer[taille_buffer];
-  fread (buffer, sizeof(buffer[0]), sizeof(buffer), fic);
-  return buffer;
+void lire_binaire (Fichier fic, char * buffer) {
+  fread (buffer, sizeof(buffer[0]), sizeof(buffer), fic.fic);
   /*printf ("LIRE : %c\n", buffer[0]);
   printf ("LIRE : %c\n", buffer[1]);
   printf ("LIRE : %c\n", buffer[2]);
@@ -38,30 +49,32 @@ char * lire_binaire (Fichier fic, int taille_buffer) {
 }
 
 void fermer_fichier (Fichier fic) {
-  fclose(fic->f);
+  fclose(fic.fic);
   printf("Fichier fermé\n");
 }
 
-bool fichier_existe(char* filename) {
+/*bool fichier_existe(char* filename) {
 	FILE* f = fopen(filename, "r");
 	if (f == NULL) {
 		return false;
 	}
 	fclose(f);
 	return true;
-}
+}*/
 
 
-/*
+
 void main () {
-  fichier ficW = ouvrir_fichier("test.bin", "wb");
-  ecrire_binaire (ficW, '1');
-  ecrire_binaire (ficW, '0');
-  ecrire_binaire (ficW, '1');
+  Fichier ficW;
+  //ficW = (Fichier) malloc (sizeof(Fichier));
+  ficW = init_fichier (ficW, "../test.bin");
+  ficW = ouvrir_fichier(ficW, "wb");
+  ecrire_bit (ficW, '1');
+  ecrire_bit (ficW, '0');
+  ecrire_bit (ficW, '1');
   fermer_fichier(ficW);
 
-  fichier ficR = ouvrir_fichier("test.bin", "rb");
+/*  fichier ficR = ouvrir_fichier("test.bin", "rb");
   lire_binaire (ficR, 10);
-  fermer_fichier(ficR);
+  fermer_fichier(ficR);*/
 }
-*/
