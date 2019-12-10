@@ -1,33 +1,44 @@
 #include <stdio.h>
 #include "fichier.h"
 
-fichier ouvrir_fichier (char * nomF, char * mode) {
-  fichier fic;
-  fic = NULL;
-  fic = fopen (nomF,mode);
-
-  if (fic == NULL)
-    printf("ERREUR : Fichier introuvable ou mode invalide\n");
+Fichier ouvrir_fichier (Fichier fic, char * mode) {
+  fic->f = NULL;
+  fic->f = fopen (nomF,mode);
   return fic;
 }
 
-void ecrire_binaire (fichier fic, char bit) {
+void ecrire_bit (Fichier fic, char bit) {
+  fic->octet[iOctet++];
+  if (fic->iOctet == 7) {
+
+    fic->iOctet = 0;
+  }
+}
+
+void ecrire_buffer (Fichier fic){
+  int i;
+  for (i = 0; i<fic->iOctet; i++) {
+    fic->buffer[iBuffer]
+  }
+}
+
+void ecrire_binaire (Fichier fic, char bit) {
   fwrite (&bit,1,1,fic);
   printf ("écriture de %c\n", bit);
 }
 
-void lire_binaire (fichier fic, int taille_buffer) {
+char * lire_binaire (Fichier fic, int taille_buffer) {
   char buffer[taille_buffer];
   fread (buffer, sizeof(buffer[0]), sizeof(buffer), fic);
-
-  printf ("LIRE : %c\n", buffer[0]);
+  return buffer;
+  /*printf ("LIRE : %c\n", buffer[0]);
   printf ("LIRE : %c\n", buffer[1]);
   printf ("LIRE : %c\n", buffer[2]);
-  printf ("LIRE : %c\n", buffer[3]);
+  printf ("LIRE : %c\n", buffer[3]);*/
 }
 
-void fermer_fichier (fichier fic) {
-  fclose(fic);
+void fermer_fichier (Fichier fic) {
+  fclose(fic->f);
   printf("Fichier fermé\n");
 }
 
