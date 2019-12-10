@@ -4,10 +4,14 @@
 
 #define MAX_CHAR 256
 
-int frequences[MAX_CHAR] ;
+typedef struct {
+	char c;
+  int occurence;
+} occurence;
+occurence frequences[MAX_CHAR] ;
 arbre arbre_codage;
 
-void calcul_frequences (fichier f);
+void calcul_frequences (Fichier f);
 void calcul_arbre_codage ();
 
 #endif
