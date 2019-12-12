@@ -1,25 +1,28 @@
 #ifndef __FICHIER_H__
 #define __FICHIER_H__
 
+#define BLOCK_SIZE 4096
+
 typedef struct{
   FILE * fic;
   char * nom;
-  char * buffer[8];
-  char * octet[256];
+  char octet[8];
+  char buffer[256];
 
   int iOctet;
   int iBuffer;
+  int nbOctet;
+  int nbOctetLu;
 
 }Fichier;
 
-Fichier init_fichier (Fichier fic, char * nom);
-Fichier ouvrir_fichier (Fichier fic, char * mode);
+void init_fichier (Fichier * fic, char * nom);
+void free_fichier (Fichier *fic);
+void ouvrir_fichier (Fichier *fic, char * mode);
 void ecrire_bit (Fichier *fic, char bit);
 void ecrire_buffer (Fichier *fic);
 void ecrire_binaire (Fichier *fic);
-void lire_binaire (Fichier fic, char * buffer);
 void fermer_fichier (Fichier * fic);
-void verification_Fic (Fichier * fic);
-//bool fichier_existe(char* filename);
-
+void verification_buffer (Fichier * fic);
+char lire_binaire (Fichier *fic);
 #endif
