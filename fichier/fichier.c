@@ -111,39 +111,39 @@ char lire_binaire (Fichier *fic) {
   return bit;
 }
 
-void main () {
-  Fichier * f;
-  f = (Fichier*) malloc (sizeof(Fichier));
-  init_fichier (f, "../test.bin");
-  ouvrir_fichier(f, "wb");
-
-/*  ecrire_bit (f, '1');
-  ecrire_bit (f, '0');
-  ecrire_bit (f, '1');
-  ecrire_bit (f, '1');
-  ecrire_bit (f, '1');*/
-  ecrire_bit (f, '0');
-  ecrire_bit (f, '1');
-  ecrire_bit (f, 'a');
-  ecrire_bit (f, 'b');
-  ecrire_bit (f, 'c');
-  ecrire_bit (f, 'd');
-  ecrire_bit (f, 'e');
-  ecrire_bit (f, 'f');
-  ecrire_bit (f, 'g');
-  ecrire_bit (f, 'h');
-  ecrire_bit (f, 'i');
-  fermer_fichier(f);
-
-  ouvrir_fichier(f,"rb");
-  printf ("Caractère lu : %c\n", lire_binaire(f));
-  printf ("Caractère lu : %c\n", lire_binaire(f));
-  printf ("Caractère lu : %c\n", lire_binaire(f));
-  printf ("Caractère lu : %c\n", lire_binaire(f));
-  printf ("Caractère lu : %c\n", lire_binaire(f));
-
-  free_fichier (f);
-/*  fichier ficR = ouvrir_fichier("test.bin", "rb");
-  lire_binaire (ficR, 10);
-  fermer_fichier(ficR);*/
-}
+// void main () {
+//   Fichier * f;
+//   f = (Fichier*) malloc (sizeof(Fichier));
+//   init_fichier (f, "../test.bin");
+//   ouvrir_fichier(f, "wb");
+//
+// /*  ecrire_bit (f, '1');
+//   ecrire_bit (f, '0');
+//   ecrire_bit (f, '1');
+//   ecrire_bit (f, '1');
+//   ecrire_bit (f, '1');*/
+//   ecrire_bit (f, '0');
+//   ecrire_bit (f, '1');
+//   ecrire_bit (f, 'a');
+//   ecrire_bit (f, 'b');
+//   ecrire_bit (f, 'c');
+//   ecrire_bit (f, 'd');
+//   ecrire_bit (f, 'e');
+//   ecrire_bit (f, 'f');
+//   ecrire_bit (f, 'g');
+//   ecrire_bit (f, 'h');
+//   ecrire_bit (f, 'i');
+//   fermer_fichier(f);
+//
+//   ouvrir_fichier(f,"rb");
+//   printf ("Caractère lu : %c\n", lire_binaire(f));
+//   printf ("Caractère lu : %c\n", lire_binaire(f));
+//   printf ("Caractère lu : %c\n", lire_binaire(f));
+//   printf ("Caractère lu : %c\n", lire_binaire(f));
+//   printf ("Caractère lu : %c\n", lire_binaire(f));
+//
+//   free_fichier (f);
+// /*  fichier ficR = ouvrir_fichier("test.bin", "rb");
+//   lire_binaire (ficR, 10);
+//   fermer_fichier(ficR);*/
+// }

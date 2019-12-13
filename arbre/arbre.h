@@ -2,7 +2,8 @@
 #define __ARBRE_H__
 
 typedef struct {
-	void* caractere;
+	char c;
+	int occurrence;
 } Elt;
 
 struct znoeud {
@@ -16,6 +17,7 @@ typedef struct znoeud noeud;
 typedef struct znoeud * arbre;
 
 arbre creer_arbre (Elt x, arbre fg, arbre fd);
+arbre creer_arbre_vide ();
 int est_arbre_vide (arbre a);
 Elt racine (arbre a);
 arbre fils_gauche (arbre a);
@@ -23,4 +25,6 @@ arbre fils_droit (arbre a);
 int est_feuille (arbre a);
 arbre detruire_arbre (arbre a);
 int nb_feuilles (arbre a);
+void print_arbre_aux(arbre a);
+void print_arbre(arbre a) ;
 #endif
