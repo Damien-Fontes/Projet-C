@@ -6,8 +6,9 @@
 typedef struct{
   FILE * fic;
   char * nom;
-  char octet[8];
-  char buffer[256];
+  char * mode;
+  unsigned char octet[8];
+  unsigned char buffer[256];
 
   int iOctet;
   int iBuffer;
@@ -16,13 +17,9 @@ typedef struct{
 
 }Fichier;
 
-void init_fichier (Fichier * fic, char * nom);
 void free_fichier (Fichier *fic);
-void ouvrir_fichier (Fichier *fic, char * mode);
-void ecrire_bit (Fichier *fic, char bit);
-void ecrire_buffer (Fichier *fic);
-void ecrire_binaire (Fichier *fic);
-void fermer_fichier (Fichier * fic);
-void verification_buffer (Fichier * fic);
-char lire_binaire (Fichier *fic);
+void ouvrir_fichier (Fichier *fic, char * nom, char * mode);
+void ecrire_bit (Fichier *fic, unsigned char bit);
+void fermer_fichier (Fichier * fic, char * mode);
+unsigned char lire_binaire (Fichier *fic);
 #endif
