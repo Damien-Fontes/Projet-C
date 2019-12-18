@@ -14,6 +14,10 @@ arbre creer_arbre (Elt x, arbre fg, arbre fd) {
   return nouveau;
 }
 
+arbre creer_arbre_vide () {
+  return NULL ;
+}
+
 int est_arbre_vide (arbre a) {
   return (a==NULL);
 }
@@ -55,4 +59,23 @@ int nb_feuilles (arbre a) {
   if (est_feuille(a))
     return 1;
   return nb_feuilles (fils_gauche(a)) + nb_feuilles(fils_droit(a));
+}
+
+void print_arbre_aux(arbre a)
+{
+  if (est_arbre_vide(a)) {
+    printf(".") ;
+  } else {
+    printf("%c, %d (", a->elt.c, a->elt.occurrence) ;
+    print_arbre_aux(a->fils_gauche) ;
+    printf(") (");
+    print_arbre_aux(a->fils_droit) ;
+    printf(")") ;
+  }
+}
+
+void print_arbre(arbre a) // Notation préfixe
+{
+  print_arbre_aux(a) ;
+  printf("\n") ;
 }
