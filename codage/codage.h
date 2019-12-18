@@ -7,7 +7,7 @@
 Elt frequences[MAX_CHAR] ;
 arbre arbre_codage;
 
-void calcul_frequences (Fichier * f);
+void calcul_frequences ();
 void calcul_arbre_codage ();
 
 #endif

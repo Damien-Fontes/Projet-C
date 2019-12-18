@@ -66,11 +66,11 @@ void print_arbre_aux(arbre a)
   if (est_arbre_vide(a)) {
     printf(".") ;
   } else {
-    printf("%c, %d (", a->elt.c, a->elt.occurrence) ;
+    printf("%c, %d \n (", a->elt.c, a->elt.occurrence) ;
     print_arbre_aux(a->fils_gauche) ;
     printf(") (");
     print_arbre_aux(a->fils_droit) ;
-    printf(")") ;
+    printf(")\n") ;
   }
 }
 

@@ -79,17 +79,23 @@ void fermer_fichier (Fichier * fic, char * mode) {
 unsigned char lire_binaire (Fichier *fic) {
   int i;
   unsigned char bit;
-  unsigned char d;
+  unsigned char d, d_temp;
   d = 0x80;
+
 
   if (fic->nbOctetLu == 0) {
     fic->nbOctetLu = fread (fic->buffer, 1, sizeof(fic->buffer), fic->fic);
     printf("nbOctetLu : %d\n", fic->nbOctetLu);
     fic->iBuffer = 0;
     for (i = 0; i<8; i++) {
-      if (fic->buffer[fic->iBuffer] == '1')
-        fic->octet[i] = fic->buffer[fic->iBuffer]&d;
-      d = d >> 1;
+      d_temp = fic->buffer[fic->iBuffer]&d;
+      if (d_temp != 0) {
+        fic->octet[fic->iOctet] = '1';
+      } else {
+        fic->octet[fic->iOctet] = '0';
+      }
+      d = d>>1;
+      fic->iOctet++;
     }
     fic->iBuffer++;
     fic->iOctet = 0;
@@ -97,14 +103,22 @@ unsigned char lire_binaire (Fichier *fic) {
   }
 
   bit = fic->octet[fic->iOctet];
+  // printf("i : %d, octet[i] : %c   ", fic->iOctet, fic->octet[fic->iOctet]);
   fic->iOctet++;
 
   if (fic->iOctet == 8) {
-    printf("Octet full\n");
+
+    fic->iOctet = 0;
+    d = 0x80;
     for (i = 0; i<8; i++) {
-      if (fic->buffer[fic->iBuffer] == '1')
-        fic->octet[i] = fic->buffer[fic->iBuffer]&d;
-      d = d >> 1;
+      d_temp = fic->buffer[fic->iBuffer]&d;
+      if (d_temp != 0) {
+        fic->octet[fic->iOctet] = '1';
+      } else {
+        fic->octet[fic->iOctet] = '0';
+      }
+      d = d>>1;
+      fic->iOctet++;
     }
     fic->iBuffer++;
     fic->iOctet = 0;
@@ -130,17 +144,17 @@ void main () {
   ecrire_bit (f, '1');
   ecrire_bit (f, '1');
   //Octet 1
-  ecrire_bit (f, 'd');
-  ecrire_bit (f, '2');
-  ecrire_bit (f, 'a');
-  ecrire_bit (f, '2');
-  ecrire_bit (f, 'b');
-  ecrire_bit (f, 'c');
-  ecrire_bit (f, 'b');
-  ecrire_bit (f, 'c');
+  ecrire_bit (f, '0');
+  ecrire_bit (f, '0');
+  ecrire_bit (f, '0');
+  ecrire_bit (f, '1');
+  ecrire_bit (f, '1');
+  ecrire_bit (f, '1');
+  ecrire_bit (f, '1');
+  ecrire_bit (f, '1');
   //Octet 3
-  ecrire_bit (f, '3');
-  ecrire_bit (f, '4');
+  /*ecrire_bit (f, '0');
+  ecrire_bit (f, '1');*/
   fermer_fichier(f, "wb");
 
   Fichier * f2;
@@ -151,6 +165,11 @@ void main () {
   printf ("Caractère lu : %c\n", lire_binaire(f2));
   printf ("Caractère lu : %c\n", lire_binaire(f2));
   printf ("Caractère lu : %c\n", lire_binaire(f2));
+  printf ("Caractère lu : %c\n", lire_binaire(f2));
+  printf ("Caractère lu : %c\n", lire_binaire(f2));
+  printf ("Caractère lu : %c\n", lire_binaire(f2));
+
+  printf ("\nCaractère lu : %c\n", lire_binaire(f2));
   printf ("Caractère lu : %c\n", lire_binaire(f2));
   printf ("Caractère lu : %c\n", lire_binaire(f2));
   printf ("Caractère lu : %c\n", lire_binaire(f2));
