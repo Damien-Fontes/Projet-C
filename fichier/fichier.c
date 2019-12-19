@@ -6,6 +6,12 @@ void free_fichier (Fichier *fic) {
   free (fic);
 }
 
+Fichier * creer_fichier (Fichier *f, char * nom, char * mode) {
+  f =(Fichier*) malloc (sizeof(Fichier));
+  ouvrir_fichier (f, nom, mode);
+  return f;
+}
+
 void ouvrir_fichier (Fichier *fic, char * nom, char * mode) {
   fic->fic = NULL;
   fic->mode = mode;
@@ -76,6 +82,11 @@ void fermer_fichier (Fichier * fic, char * mode) {
   free_fichier(fic);
 }
 
+char lire_fic (Fichier * fic) {
+  fread (fic->buffer, 1, 1, fic->fic);
+  return fic->buffer[0];
+}
+
 unsigned char lire_binaire (Fichier *fic) {
   int i;
   unsigned char bit;
@@ -131,8 +142,8 @@ unsigned char lire_binaire (Fichier *fic) {
 
 void main () {
   Fichier * f;
-  f =(Fichier*) malloc (sizeof(Fichier));
-  ouvrir_fichier(f,"../test.bin", "wb");
+  f = creer_fichier (f, "../test.bin", "wb");
+  //ouvrir_fichier(f,"../test.bin", "wb");
 
   //Octet 0
   ecrire_bit (f, '0');

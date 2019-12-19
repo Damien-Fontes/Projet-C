@@ -33,14 +33,14 @@ int main(int argc, char** argv) {
 			perror("Invalid arguments");
 			return EXIT_FAILURE;
 		}
-		else {
-			// appel d'une fonction file_exists et indique si cet argument est un fichier qui existe
-			if (!fichier_existe(argv[i])) {
-				perror("File doesn't exist");
-				return EXIT_FAILURE;
-			}
-			nom_fichier = argv[k];
-		}
+		// else {
+		// 	// appel d'une fonction file_exists et indique si cet argument est un fichier qui existe
+		// 	if (!fichier_existe(argv[i])) {
+		// 		perror("File doesn't exist");
+		// 		return EXIT_FAILURE;
+		// 	}
+		// 	nom_fichier = argv[k];
+		// }
 	}
 
 	// Si aucun mode n'a �t� sp�cifi�, on quitte le programme.
@@ -50,13 +50,13 @@ int main(int argc, char** argv) {
 	}
 
 	if (mode == COMPRESS) {
-		if (compression(filename) == -1) {
+		if (compression(nom_fichier) == -1) {
 			perror("Erreur compression");
 			return EXIT_FAILURE;
 		}
 	}
 	else {
-		if (decompression(filename) == -1) {
+		if (decompression(nom_fichier) == -1) {
 			perror("Erreur compression");
 			return EXIT_FAILURE;
 		}
