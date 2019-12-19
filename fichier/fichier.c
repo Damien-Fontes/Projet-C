@@ -1,13 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "fichier.h"
 
 void free_fichier (Fichier *fic) {
   free (fic);
 }
 
-Fichier * creer_fichier (Fichier *f, char * nom, char * mode) {
-  f =(Fichier*) malloc (sizeof(Fichier));
+Fichier * creer_fichier (char * nom, char * mode) {
+  Fichier* f =(Fichier*) malloc (sizeof(Fichier));
   ouvrir_fichier (f, nom, mode);
   return f;
 }
@@ -60,8 +61,8 @@ void ecrire_bit (Fichier * fic, unsigned char bit) {
 
 void fermer_fichier (Fichier * fic, char * mode) {
   int octet, b, i;
-  int nbOctet = fic->nbOctet;
-  if (mode = "wb") {
+  long unsigned int nbOctet = fic->nbOctet;
+  if (strcmp(mode,"wb")==0) {
     printf ("mode = wb\n");
     if (fic->iOctet != 0) {
       octet = 0;
@@ -96,7 +97,7 @@ unsigned char lire_binaire (Fichier *fic) {
 
   if (fic->nbOctetLu == 0) {
     fic->nbOctetLu = fread (fic->buffer, 1, sizeof(fic->buffer), fic->fic);
-    printf("nbOctetLu : %d\n", fic->nbOctetLu);
+    printf("nbOctetLu : %ld\n", fic->nbOctetLu);
     fic->iBuffer = 0;
     for (i = 0; i<8; i++) {
       d_temp = fic->buffer[fic->iBuffer]&d;
@@ -139,58 +140,58 @@ unsigned char lire_binaire (Fichier *fic) {
   }
   return bit;
 }
-
-void main () {
-  Fichier * f;
-  f = creer_fichier (f, "../test.bin", "wb");
-  //ouvrir_fichier(f,"../test.bin", "wb");
-
-  //Octet 0
-  ecrire_bit (f, '0');
-  ecrire_bit (f, '0');
-  ecrire_bit (f, '0');
-  ecrire_bit (f, '1');
-  ecrire_bit (f, '0');
-  ecrire_bit (f, '0');
-  ecrire_bit (f, '1');
-  ecrire_bit (f, '1');
-  //Octet 1
-  ecrire_bit (f, '0');
-  ecrire_bit (f, '0');
-  ecrire_bit (f, '0');
-  ecrire_bit (f, '1');
-  ecrire_bit (f, '1');
-  ecrire_bit (f, '1');
-  ecrire_bit (f, '1');
-  ecrire_bit (f, '1');
-  //Octet 3
-  /*ecrire_bit (f, '0');
-  ecrire_bit (f, '1');*/
-  fermer_fichier(f, "wb");
-
-  Fichier * f2;
-  f2 =(Fichier*) malloc (sizeof(Fichier));
-  ouvrir_fichier(f2, "../test.bin", "rb");
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-
-  printf ("\nCaractère lu : %c\n", lire_binaire(f2));
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-  printf ("Caractère lu : %c\n", lire_binaire(f2));
-  fermer_fichier(f2, "rb");
-
-/*  fichier ficR = ouvrir_fichier("test.bin", "rb");
-  lire_binaire (ficR, 10);
-  fermer_fichier(ficR);*/
-}
+//
+// void main () {
+//   Fichier *f;
+//   f = creer_fichier (f, "../test.bin", "wb");
+//   //ouvrir_fichier(f,"../test.bin", "wb");
+//
+//   //Octet 0
+//   ecrire_bit (f, '0');
+//   ecrire_bit (f, '0');
+//   ecrire_bit (f, '0');
+//   ecrire_bit (f, '1');
+//   ecrire_bit (f, '0');
+//   ecrire_bit (f, '0');
+//   ecrire_bit (f, '1');
+//   ecrire_bit (f, '1');
+//   //Octet 1
+//   ecrire_bit (f, '0');
+//   ecrire_bit (f, '0');
+//   ecrire_bit (f, '0');
+//   ecrire_bit (f, '1');
+//   ecrire_bit (f, '1');
+//   ecrire_bit (f, '1');
+//   ecrire_bit (f, '1');
+//   ecrire_bit (f, '1');
+//   //Octet 3
+//   /*ecrire_bit (f, '0');
+//   ecrire_bit (f, '1');*/
+//   fermer_fichier(f, "wb");
+//
+//   Fichier * f2;
+//   f2 =(Fichier*) malloc (sizeof(Fichier));
+//   ouvrir_fichier(f2, "../test.bin", "rb");
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//
+//   printf ("\nCaractère lu : %c\n", lire_binaire(f2));
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//   printf ("Caractère lu : %c\n", lire_binaire(f2));
+//   fermer_fichier(f2, "rb");
+//
+// /*  fichier ficR = ouvrir_fichier("test.bin", "rb");
+//   lire_binaire (ficR, 10);
+//   fermer_fichier(ficR);*/
+// }

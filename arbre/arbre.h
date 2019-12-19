@@ -2,8 +2,9 @@
 #define __ARBRE_H__
 
 typedef struct {
-	unsigned char c;
+	char c;
 	int occurrence;
+	char * encodage;
 } Elt;
 
 struct znoeud {

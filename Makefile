@@ -1,24 +1,20 @@
-arbredir = arbre/
-codagedir = codage/
-fichierdir = fichier/
+projet : main.o fichier/fichier.o arbre/arbre.o codage/codage.o compression/compression.o
+	gcc -o projet main.o fichier.o arbre.o codage.o compression.o
 
-CC = gcc
-CFLAGS = -std=c11 -Wall -Wconversion -Werror -Wextra -Wpedantic -I$(arbredir) -I$(codagedir) -I$(fichierdir)
-LDFLAGS =
-VPATH = $(arbredir) $(codagedir) $(fichierdir)
-objects = main.o $(arbredir)arbre.o $(codagedir)codage.o $(fichierdir)fichier.o compression.o
-executable = compression
+main.o : main.c fichier/fichier.h compression/compression.h
+	gcc -c main.c
 
-all: $(executable)
+fichier/fichier.o : fichier/fichier.c fichier/fichier.h
+	gcc -c fichier/fichier.c
+
+arbre/arbre.o : arbre/arbre.c arbre/arbre.h
+	gcc -c arbre/arbre.c
+
+codage/codage.o : codage/codage.c arbre/arbre.h fichier/fichier.h codage/codage.h
+	gcc -c codage/codage.c
+
+compression/compression.o : compression/compression.c arbre/arbre.h codage/codage.h fichier/fichier.h compression/compression.h
+	gcc -c compression/compression.c
 
 clean:
-	$(RM) $(objects) $(executable)
-
-$(executable): $(objects)
-	$(CC) $(objects) $(LDFLAGS) -o $(executable)
-
-$(arbredir)arbre.o: arbre.c arbre.h
-$(codagedir)codage.o: codage.c codage.h
-$(fichierdir)fichier.o: fichier.c fichier.h
-compression.o: compression.c compression.h arbre.h codage.h fichier.h
-main.o: main.c arbre.h codage.h fichier.h compression.h
+	rm *.o ; rm main

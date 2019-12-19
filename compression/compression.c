@@ -1,28 +1,37 @@
 #include <stdio.h>
 #include <string.h>
-#include "codage.h"
-#include "fichier.h"
+#include "../arbre/arbre.h"
+#include "../codage/codage.h"
+#include "../fichier/fichier.h"
 #include "compression.h"
 
 int compression (char * name) {
-  int tailleFichier;
+  int tailleFichier, i;
   Fichier * fic;
-  fic = creer_fichier(fic, name, "r");
+  fic = creer_fichier(name, "r");
 
   tailleFichier = 0;
   while(feof(fic->fic) == 0) {
-    taillleFichier++;
+    lire_fic(fic);
+    tailleFichier++;
   }
   fermer_fichier(fic, "r");
+
 
   char text[tailleFichier];
-  fic = creer_fichier(fic, name, "r");
-  while(feof(fic->fic) == 0) {
-    strcat(text, lire_fic(fic));
+  text[tailleFichier] = '\0';
+  fic = creer_fichier(name, "r");
+  for (i = 0; i<tailleFichier; i++) {
+    text[i] = lire_fic(fic);
   }
   fermer_fichier(fic, "r");
 
-  printf("%s\n", text);
+  calcul_frequences (text);
+  calcul_arbre_codage();
+  print_arbre(arbre_codage);
+
+  char encodage[256]
+  tableau_encodage(arbre_codage, 0, encodage);
 
   return 0;
 }
