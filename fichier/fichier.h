@@ -1,7 +1,7 @@
 #ifndef __FICHIER_H__
 #define __FICHIER_H__
 
-#define BLOCK_SIZE 4096
+#define BLOCK_SIZE 256
 
 typedef struct{
   FILE * fic;
@@ -12,6 +12,7 @@ typedef struct{
 
   int iOctet;
   int iBuffer;
+  int remplissage;
   long unsigned int nbOctet;
   long unsigned int nbOctetLu;
 
@@ -23,5 +24,6 @@ void ouvrir_fichier (Fichier *fic, char*nom, char * mode);
 void ecrire_bit (Fichier *fic, unsigned char bit);
 void fermer_fichier (Fichier * fic, char * mode);
 unsigned char lire_binaire (Fichier *fic);
-unsigned char lire_fic (Fichier * fic);
+unsigned char lire_char (Fichier * fic);
+void ecrire_char (Fichier * fic, char c);
 #endif

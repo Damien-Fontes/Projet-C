@@ -56,10 +56,10 @@ int main(int argc, char** argv) {
 		}
 	}
 	else {
-		// if (decompression(nom_fichier) == -1) {
-		// 	perror("Erreur compression");
-		// 	return EXIT_FAILURE;
-		// }
+		if (decompression(nom_fichier) == -1) {
+			perror("Erreur compression");
+			return EXIT_FAILURE;
+		}
 	}
 
 	return EXIT_SUCCESS;

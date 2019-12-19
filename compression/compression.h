@@ -2,5 +2,5 @@
 #define __COMPRESSION_H__
 
 int compression(char * name);
-int decompression(char * f);
+int decompression(char * name);
 #endif

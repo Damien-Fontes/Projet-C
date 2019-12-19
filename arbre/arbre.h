@@ -4,7 +4,7 @@
 typedef struct {
 	char c;
 	int occurrence;
-	char * encodage;
+	char encodage[256];
 } Elt;
 
 struct znoeud {
