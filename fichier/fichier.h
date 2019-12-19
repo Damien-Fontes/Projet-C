@@ -17,9 +17,11 @@ typedef struct{
 
 }Fichier;
 
+Fichier * creer_fichier (Fichier *f, char * nom, char * mode);
 void free_fichier (Fichier *fic);
 void ouvrir_fichier (Fichier *fic, char * nom, char * mode);
 void ecrire_bit (Fichier *fic, unsigned char bit);
 void fermer_fichier (Fichier * fic, char * mode);
 unsigned char lire_binaire (Fichier *fic);
+char lire_fic (Fichier * fic);
 #endif
