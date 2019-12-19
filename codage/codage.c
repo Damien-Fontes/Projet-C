@@ -6,7 +6,7 @@
 
 void calcul_frequences () {
   int i , j ;
-  char * buffer = "Salut tout le monde !";
+  unsigned char * buffer = "Salut tout le monde !";
 
   // initialisation de frequences[] à 0
   for (i = 0 ; i < MAX_CHAR ; i++)  {
@@ -27,17 +27,17 @@ void calcul_frequences () {
   }
 
   // while (feof(f->fic) == 0) {
-  //   buffer = lire_binaire (f, buffer) ;
-    //
-    // j = 0 ;
-    // while (j < MAX_CHAR) {
-    //   if (buffer == frequences[j].c) {
-    //     frequences[j].occurrence++ ;
-    //     j = MAX_CHAR ;  // sortie de la boucle
-    //   } else {
-    //     j++ ;
-    //   }
-    // }
+  //   buffer = lire_fic (f) ;
+  //
+  //   j = 0 ;
+  //   while (j < MAX_CHAR) {
+  //     if (buffer == frequences[j].c) {
+  //       frequences[j].occurrence++ ;
+  //       j = MAX_CHAR ;  // sortie de la boucle
+  //     } else {
+  //       j++ ;
+  //     }
+  //   }
   // }
 }
 
@@ -54,7 +54,7 @@ void calcul_arbre_codage() {
   // remplissage de codage[] selon les frequences
   for (i = 0 ; i < MAX_CHAR ; i++) {
     if (frequences[i].occurrence != 0) {
-      elt_tmp.c = (char)frequences[i].c ;
+      elt_tmp.c = (unsigned char)frequences[i].c ;
       elt_tmp.occurrence = frequences[i].occurrence ;
       codage[cptCodage] = creer_arbre (elt_tmp, creer_arbre_vide(), creer_arbre_vide());
       tailleTableau++;

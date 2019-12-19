@@ -2,7 +2,7 @@
 #define __ARBRE_H__
 
 typedef struct {
-	char c;
+	unsigned char c;
 	int occurrence;
 } Elt;
 
