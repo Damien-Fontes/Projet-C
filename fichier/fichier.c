@@ -82,9 +82,9 @@ void fermer_fichier (Fichier * fic, char * mode) {
   free_fichier(fic);
 }
 
-char lire_fic (Fichier * fic) {
+unsigned char lire_fic (Fichier * fic) {
   fread (fic->buffer, 1, 1, fic->fic);
-  return fic->buffer[0];
+  return (unsigned char)fic->buffer[0];
 }
 
 unsigned char lire_binaire (Fichier *fic) {
